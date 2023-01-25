@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%}
+{% block content %}
+<div class="container">
+
+    <div class="well text-center">Promociones</div>
+    {% if promociones != []: %}
+        <div class="row">
+            {% for item in promociones %}
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title text-center">{{item.pfsabprodnombre}}</h5>
+                    </div>
+                    <img style="width: 100%; height:100px ;" class="card-img-top" src="{{item.pfsabprodimage}}"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text">{{item.pfsabproddetalle}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="row">
+                            <div class="col">Fecha Inicio <b>{{item.pfsabpromfechainicio}}</b> </div>
+                            <div class="col">Fecha Inicio <b>{{item.pfsabpromfechafin}}</b> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <div class="row">
+        <h2 class="text-center" style="padding: 30px; font-size: 10vw ;">NO EXISTE PROMOCIONES</h2>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

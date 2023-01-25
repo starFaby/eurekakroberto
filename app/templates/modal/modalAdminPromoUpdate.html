@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Product update
+{% endblock%}
+{% block content %}
+<section class="p-4">
+    <div class="well text-center">Formulario Update de Promociones</div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="p-4 col-md-4">
+            <form action="{{ url_for('adpromo.onGetControllerAdminPromoUpdate', id=promocion.pfsabpromid) }}" method="post">
+                <div class="form-group">
+                    <label for="txtDescuento">descuento</label>
+                    <input type="text" class="form-control" id="txtDto" name="txtDto" aria-describedby="emailHelp"
+                        placeholder="Nombre..." value="{{promocion.pfsabpromdto}}">
+                </div>
+                <div class="form-group">
+                    <label for="txtFechaInicio">Fecha Inicio</label>
+                    <input type="date" class="form-control" id="txtFechaInicio" name="txtFechaInicio"
+                        placeholder="Image..." value="{{promocion.pfsabpromfechainicio}}">
+                </div>
+                <div class="form-group">
+                    <label for="txtFechaFin">Fecha Fin</label>
+                    <input type="date" class="form-control" id="txtFechaFin" name="txtFechaFin"
+                        placeholder="Detalle..." value="{{promocion.pfsabpromfechafin}}">
+                </div>
+                <div class="form-group">
+                    <label for="txtDescripcion">Descripcion</label>
+                    <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion"
+                        placeholder="Precio..." value="{{promocion.pfsabpromdescripcion}}">
+                </div>
+                <div class="form-group">
+                    <label for="selectEstado">Estado</label>
+                    <select class="form-control" id="selectEstado" name="selectEstado">
+                        <option selected>Elija...</option>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectCategoria">Producto</label>
+                    <select class="form-control" id="selectCategoria" name="selectCategoria">
+                        <option selected>Elija...</option>
+                        {% for item in productos %}
+                        <option value="{{item.pfsabprodid}}">{{item.pfsabprodnombre}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+            </form>
+        </div>
+        <div class="p-4 col-md-4 d-flex justify-content-center">
+            <img style="width: 25vw ; height: 25vw;" src="" alt="">
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%}
+{% block content %}
+<div class="container">
+    <div class="well text-center">Productos</div>
+    {% if productos != []: %}
+    <div class="row">
+        {% for producto in productos %}
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem;">
+                <img style="width: 100%; height:100px ;" class="card-img-top" src="{{producto.pfsabprodimage}}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{producto.pfsabprodnombre}}</h5>
+                    <p class="card-text">{{producto.pfsabproddetalle}}</p>
+                    <p class="card-text">{{producto.pfsabprodprecio}}</p>
+                    <p class="card-text">{{producto.pfsabprodstock}}</p>
+                    <a href=""
+                        class="btn btn-primary">Ir...</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <h2 class="text-center" style="padding: 30px; font-size: 10vw ;">NO EXISTE CATEGORIAS</h2>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
