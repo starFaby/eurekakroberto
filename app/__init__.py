@@ -14,6 +14,7 @@ from app.routes.routerAdminPromo import adpromo
 from app.routes.routerClientCategoria import clca
 from app.routes.routerClientProducto import rcp 
 from app.routes.routerClientPromociones import rcpm 
+from app.routes.routerClientCarrito import rcct 
 from app.middlewares.authLogin import UserModel
 
 loginManager = LoginManager()
@@ -39,6 +40,7 @@ def apprun():
     app.register_blueprint(clca)
     app.register_blueprint(rcp)
     app.register_blueprint(rcpm)
+    app.register_blueprint(rcct)
     
     #Sistem
     loginManager.init_app(app)

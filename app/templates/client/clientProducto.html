@@ -18,8 +18,14 @@ Index
                     <p class="card-text">{{producto.pfsabproddetalle}}</p>
                     <p class="card-text">{{producto.pfsabprodprecio}}</p>
                     <p class="card-text">{{producto.pfsabprodstock}}</p>
-                    <a href=""
-                        class="btn btn-primary">Ir...</a>
+                    {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('rcct.onGetControllerClientCarritoList', id=producto.pfsabprodid) }}"
+                        class="btn btn-primary">Ver</a>
+                    {% else %}
+                    <h5>Registrate... Por Fabor</h5>
+                    <a href="{{ url_for('loginin.onGetLogin')}}"
+                        class="btn btn-danger">Login</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

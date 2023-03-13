@@ -86,7 +86,6 @@ Index
                     </tr>
                 </thead>
                 <tbody>
-
                     {% for item in cateProd.items %}
                     <tr>
                         <th scope="row">{{item.pfsabprodid}}</th>
@@ -95,10 +94,10 @@ Index
                         <td>{{item.pfsabproddetalle}}</td>
                         <td>{{item.pfsabprodprecio}}</td>
                         <td>{{item.pfsabprodstock}}</td>
-                        <td>{{item.pfsabprodestado}}</td>
                         <td>{{item.pfsabprodcreatedat}}</td>
+                        <td>{{item.pfsabcategoriaid}}</td>
                         <td>
-                            <button>
+                            <button> 
                                 <a href="{{ url_for('adcapr.onGetControllerAdminCateProdUpdate', id=item.pfsabprodid) }}">Actualizar
                                 </a>
                             </button>

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Carrito
+{% endblock%}
+{% block content %}
+<div class="container">
+    <div class="well text-center">Carrito</div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="d-flex justify-content-center">
+                <img style="width: 15vw; height: 15vw;" src="{{ producto.pfsabprodimage }}" alt="">
+            </div>
+            <p class="text-center">{{ producto.pfsabproddetalle }}</p>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-center">{{ producto.pfsabprodnombre }}</h2>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-center">Productos Disponibles</h2>
+                    <p class="text-center "><input class="text-center border-0 w-25 display-1" id="stok" name="stok" type="text" value="{{ producto.pfsabprodstock }}" disabled></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="row">
+                        <p class="text-center">Elija Cantidad</p>
+                        <div class="row text-center">
+                            <div class="col-6" ><button class="cantMenos">-</button></div>
+                            <div class="col-6" ><button class="cantMas">+</button></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <p class="text-center">Cantidad</p>
+                        <div class="row ">
+                            <div class="text-center"><input class="text-center border-0 w-75 display-1" id="cant" name="cant" type="text" value="1" disabled></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <p class="text-center">Precio</p>
+                        <div class="row ">
+                            <div class="text-center"><span class="display-1">$</span><input class="text-center border-0 carritoInputWidth display-1 w-75" id="precio" name="cant" type="text" value="{{ producto.pfsabprodprecio }}" disabled></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <p class="text-center">Precio Final</p>
+                        <div class="row ">
+                            <div class="text-center"><span class="display-1">$</span><input class="text-center border-0 w-75 display-1" id="precioFinal" name="cant" type="text" value="{{ producto.pfsabprodprecio }}" disabled></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary w-25">Carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

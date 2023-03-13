@@ -10,7 +10,6 @@ class ControllerAdminCateProd:
         pages = 5
         cateProd = Producto.query.order_by(Producto.pfsabprodid.asc()).paginate(page, pages,error_out=False)
         categorias = Categoria.query.all()
-        print(categorias)
         if cateProd != [] or categorias != []:
             if request.method == 'POST' and 'tag' in request.form:
                 tag = request.form["tag"]
@@ -62,7 +61,6 @@ class ControllerAdminCateProd:
             else:
                 flash('Campos vacios llene porfabor', category='success')
                 return redirect(url_for('adcapr.controllerAdminCateProdList'))
-
         return render("modal/modalAdminCateProdUpdate.html", productos=productos, categorias=categorias)
 
     def onGetControllerAdminCateProdDelete(id):

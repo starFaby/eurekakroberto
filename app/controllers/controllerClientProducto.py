@@ -5,9 +5,6 @@ from app.database.database import *
 class ControllerClientProducto:
 
     def onGetControllerProductoList(id):
-        if current_user.is_authenticated:
-            productos = Producto.query.filter(Producto.pfsabcategoriaid == id)
-            return render("client/clientProducto.html", productos = productos)
-        else:
-            return redirect(url_for("loginin.onGetLogin"))
+        productos = Producto.query.filter(Producto.pfsabcategoriaid == id)
+        return render("client/clientProducto.html", productos = productos)
 
