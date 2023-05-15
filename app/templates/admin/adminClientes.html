@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%}
+{% block content %}
+<div class="container p-4">
+    <div class="well text-center display-3">Clientes</div>
+    <div class="row">
+        <div class="col-md-12 p-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <strong>Buscar Por: {{ tag }}</strong>
+                    </div>
+                    <div class="col-4">
+                        <form action="" method="post" autocomplete="off">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" name="tag" id="tag"
+                                        placeholder="Nombre..." />
+                                </div>
+                                <div class="col-6" align="left">
+                                    <input type="submit" value="Search" class="form-control btn btn-primary " name="">
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if clients != []: %}
+            <table class="table text-center">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">Cedula</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">username</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Avatar</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for item in clients.items %}
+                    <tr>
+                        <th scope="row">{{item.pfsabcedula}}</th>
+                        <td>{{item.pfsabnombres}}</td>
+                        <td>{{item.pfsabapellidos}}</td>
+                        <td>{{item.pfsabusername}}</td>
+                        <td>{{item.pfsabemail}}</td>
+                        <td>{{item.pfsabdireccion}}</td>
+                        <td>{{item.pfsabcellphone}}</td>
+                        <td>{{item.pfsabphone}}</td>
+                        <td><img style="width: 50px ; height: 50px ;" src="{{item.pfsabavatar}}" alt=""></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if clients.has_prev %}
+                    <li class="page-item"> <a class="page-link"
+                            href="{{ url_for('racl.onGetControllerClientsList', page=clients.prev_num )}}">Previous</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item"> <a class="page link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+                    {% for page in clients.iter_pages(left_edge=3, right_edge=3) %}
+                    {% if page %}
+
+                    {% if page==clients.page %}
+                    <li class="page-item active"><a class="page-link"
+                            href="{{ url_for('racl.onGetControllerClientsList', page=page) }}">{{ page }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link"
+                            href="{{ url_for('racl.onGetControllerClientsList', page=page) }}">{{ page }}</a></li>
+                    {% endif %}
+
+                    {% else %}
+                    <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if clients.has_next %}
+                    <li class="page-item"> <a class="page-link"
+                            href="{{ url_for('racl.onGetControllerClientsList', page=clients.next_num )}}">Next</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item"> <a class="page link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            {% else %}
+            <section class="">
+                <h2 class="text-center" style="padding: 10px; font-size: 5vw;">No existe datos</h2>
+            </section>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

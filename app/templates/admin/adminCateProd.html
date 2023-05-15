@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%}
+{% block content %}
+<div class="container">
+    <div class="well text-center display-3">Formulario de Categoria Producto</div>
+    <div class="row">
+        <div class="col-md-4" style="padding: 25px ;">
+            <form action="/newcp" method="post">
+                <div class="form-group">
+                    <label for="txtNombre">Nombre</label>
+                    <input type="text" class="form-control" id="txtNombre" name="txtNombre" aria-describedby="emailHelp"
+                        placeholder="Nombre...">
+                </div>
+                <div class="form-group">
+                    <label for="txtImage">Image</label>
+                    <input type="text" class="form-control" id="txtImage" name="txtImage" placeholder="Image...">
+                </div>
+                <div class="form-group">
+                    <label for="txtDetalle">Detalle</label>
+                    <input type="text" class="form-control" id="txtDetalle" name="txtDetalle" placeholder="Detalle...">
+                </div>
+                <div class="form-group">
+                    <label for="txtDetalle">Precio</label>
+                    <input type="text" class="form-control" id="txtPrecio" name="txtPrecio" placeholder="Precio...">
+                </div>
+                <div class="form-group">
+                    <label for="txtDetalle">Stock</label>
+                    <input type="text" class="form-control" id="txtStock" name="txtStock" placeholder="Stock...">
+                </div>
+                <div class="form-group">
+                    <label for="selectEstado">Estado</label>
+                    <select class="form-control" id="selectEstado" name="selectEstado">
+                        <option selected>Elija...</option>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectCategoria">Categoria</label>
+                    <select class="form-control" id="selectCategoria" name="selectCategoria">
+                        <option selected>Elija...</option>
+                        {% for item in categorias %}
+                        <option value="{{item.pfsabcateid}}">{{item.pfsabcatenombre}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+            </form>
+        </div>
+        <div class="col-md-8" style="padding: 25px ;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <strong>Buscar Por: {{ tag}}</strong>
+                    </div>
+                    <div class="col-4">
+                        <form action="" method="post" autocomplete="off">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" name="tag" id="tag"
+                                        placeholder="Enter keyword" />
+                                </div>
+                                <div class="col-6" align="left">
+                                    <input type="submit" value="Buscar..." class="form-control btn btn-primary " name="">
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if cateProd != []: %}
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Creacion</th>
+                        <th scope="col">categoria id</th>
+                        <th scope="col" colspan="2">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cateProd.items %}
+                    <tr>
+                        <th scope="row">{{item.pfsabprodid}}</th>
+                        <td>{{item.pfsabprodnombre}}</td>
+                        <td><img style="width: 50px ; height: 50px ;" src="{{item.pfsabprodimage}}" alt=""></td>
+                        <td>{{item.pfsabproddetalle}}</td>
+                        <td>{{item.pfsabprodprecio}}</td>
+                        <td>{{item.pfsabprodstock}}</td>
+                        <td>{{item.pfsabprodcreatedat}}</td>
+                        <td>{{item.pfsabcategoriaid}}</td>
+                        <td>
+                            <button> 
+                                <a href="{{ url_for('adcapr.onGetControllerAdminCateProdUpdate', id=item.pfsabprodid) }}">Actualizar
+                                </a>
+                            </button>
+                        </td>
+                        <td>
+                            <button>
+                                <a href="{{ url_for('adcapr.onGetControllerAdminCateProdDelete', id=item.pfsabprodid) }}">Eliminar
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if cateProd.has_prev %}
+                    <li class="page-item"> <a class="page-link"
+                            href="{{ url_for('adcapr.controllerAdminCateProdList', page=cateProd.prev_num )}}">Previous</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item"> <a class="page link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+                    {% for page in cateProd.iter_pages(left_edge=3, right_edge=3) %}
+                    {% if page %}
+
+                    {% if page==cateProd.page %}
+                    <li class="page-item active"><a class="page-link"
+                            href="{{ url_for('adcapr.controllerAdminCateProdList', page=page) }}">{{ page }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link"
+                            href="{{ url_for('adcapr.controllerAdminCateProdList', page=page) }}">{{ page }}</a></li>
+                    {% endif %}
+
+                    {% else %}
+                    <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if cateProd.has_next %}
+                    <li class="page-item"> <a class="page-link"
+                            href="{{ url_for('adcapr.controllerAdminCateProdList', page=cateProd.next_num )}}">Next</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item"> <a class="page link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            {% else %}
+            <section class="">
+                <h2 class="text-center" style="padding: 10px; font-size: 5vw;">No existe datos</h2>
+            </section>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

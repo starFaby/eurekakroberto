@@ -1,0 +1,32 @@
+.carritoInputWidth{
+    width: 5vw;
+}
+input[name=txtCantidad] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+input[name=txtStock] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+input[name=txtPrecio] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+input[name=txtPrecioFinal] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+input[name=txtProductoId] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+.imageCarrito{
+    width: 10vw;
+    height: 10vw;
+}

@@ -1,0 +1,52 @@
+<div class="starfn">
+    <div>
+        <h1>Menu</h1>
+        <button class="abg">
+            <div class="hamburger">
+                <hr>
+                <hr>
+                <hr>
+            </div>
+        </button>
+    </div>
+    <nav class="navs">
+        <ul>
+            {% if current_user.is_authenticated %}
+            {% if current_user.id == 'starfaby' %}
+            {% if current_user.isadmin == True %}
+            {% if current_user.email == 'star._faby@hotmail.com' %}
+            <li class="submenu">
+                <button class="btnsm">Admin</button>
+                <ul class="abgm">
+                    <li><a href="/adcate">Admin Categoria <span class="icon"></span></a></li>
+                    <li><a href="/adcapr">Admin Categoria Producto<span class="icon"></span></a></li>
+                    <li><a href="/adpromo">Admin Promociones<span class="icon"></span></a></li>
+                    <li><a href="/racl">Admin Clientes<span class="icon"></span></a></li>
+                    <li><a href="/racnt">Admin Canasta<span class="icon"></span></a></li>
+                    <li><a href="/ralcr">lucro<span class="icon"></span></a></li>
+                </ul>
+            </li>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            <li><a href="/"><span class="icon">Inicio</span></a></li>
+            <li><a href="/clca"><span class="icon">Categoria</span></a></li>
+            <li><a href="/rcpm"><span class="icon">Promociones </span></a></li>
+            <li><a href="/rcqs"><span class="icon">Quienes Somos</span></a></li>
+            <li class="pull-right">
+                <div class="alin">
+                    <ul>
+                        {% if current_user.is_authenticated %}
+                        <li><span>Bienvenido: {{current_user.id}}</span></li>
+                        <li><img src="{{current_user.avatar}}" alt="" style="width: 20px; height: 20px;"></li>
+                        <li><button class="btnlogout"><a href="/logout">Logout</a></button></li>
+                        {% else %}
+                        <li><button class="btnloginin"><a class="nav-link" href="loginin">Login In</a></button></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>

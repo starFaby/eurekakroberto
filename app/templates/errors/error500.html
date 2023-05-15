@@ -1,0 +1,20 @@
+{% extends 'baseerror.html' %}
+{% block title %}
+    {{ super() }}
+    404
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Lo Sentimos..!</h1>
+                <h2>Error interno del servidor 500</h2>
+                <hr>
+                <p class="display-6 blink_me text-danger">Por Fabor comuniquese con el administrador o vuelva a intentarlo</p>
+            </div>
+            <div class="col-md-12 text-center">
+                <button><a href="/" class="text-danger">Volver...</a></button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

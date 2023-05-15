@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%}
+{% block content %}
+<div class="container p-4">
+    <div class="well text-center display-3">Lucro</div>
+    <form action="/ralsave" method="post">
+        <div class="row m-4">
+            <div class="col-md-3 d-flex justify-content-center">
+                <h2>Fecha Inicio</h2>
+                <input class="m-1" type="date" name="dFechaInicio" id="dFechaInicio">
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <h2>Fecha Fin</h2>
+                <input class="m-1" type="date" name="dFechaFin" id="dFechaFin">
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <h2 class="m-2">Suma</h2>
+                <h2 class="m-2 text-danger">{{sumaLucro}}</h2>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">
+                <h2 class="m-2">Resultado</h2>
+                <h2 class="m-2 text-danger">{{finLucro}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 d-flex justify-content-center">
+                <button type="submit">Calcular</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+.cnstLetherBIg{
+    font-size: 7vw;
+}
+input[name=txtNumFact] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+input[name=txtSumaTotal] {
+    pointer-events: none;
+    background:  #f5f5f5;
+    border: #fff 0px solid;
+}
+.blink_me {
+    animation: blinker 1s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Categorias
+{% endblock%}
+{% block content %}
+<div class="container">
+    <div class="well text-center display-3 m-3">Categoria</div>
+    {% if categorias != []: %}
+    <div class="row">
+        {% for categoria in categorias %}
+        <div class="col-md-3">
+            <div class="card imghover" style="width: 18rem; margin: 5px;">
+                <img style="width: 100%; height:100px ;" class="card-img-top" src="{{categoria.pfsabcateimage}}"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{categoria.pfsabcatenombre}}</h5>
+                    <p class="card-text">{{categoria.pfsabcatedetalle}}</p>
+                    <a href="{{ url_for('rcp.onGetControllerProductoList', id=categoria.pfsabcateid) }}"
+                        class="btn btn-primary">Ir...</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <h2 class="text-center" style="padding: 30px; font-size: 10vw ;">NO EXISTE CATEGORIAS</h2>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

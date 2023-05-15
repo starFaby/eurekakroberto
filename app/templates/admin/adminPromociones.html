@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Index
+{% endblock%} 
+{% block content %}
+<div class="container">
+    <div class="well text-center display-3">Formulario de Promociones</div>
+    <div class="row">
+        <div class="col-md-4" style="padding: 25px ;">
+            <form action="/newpp" method="post">
+                <div class="form-group">
+                    <label for="txtDescuento">descuento</label>
+                    <input type="text" class="form-control" id="txtDto" name="txtDto" aria-describedby="emailHelp"
+                        placeholder="Nombre...">
+                </div>
+                <div class="form-group">
+                    <label for="txtFechaInicio">Fecha Inicio</label>
+                    <input type="date" class="form-control" id="txtFechaInicio" name="txtFechaInicio" placeholder="Image...">
+                </div>
+                <div class="form-group">
+                    <label for="txtFechaFin">Fecha Fin</label>
+                    <input type="date" class="form-control" id="txtFechaFin" name="txtFechaFin" placeholder="Detalle...">
+                </div>
+                <div class="form-group">
+                    <label for="txtDescripcion">Descripcion</label>
+                    <input type="text" class="form-control" id="txtDescripcion" name="txtDescripcion" placeholder="Precio...">
+                </div>
+                <div class="form-group">
+                    <label for="selectEstado">Estado</label>
+                    <select class="form-control" id="selectEstado" name="selectEstado">
+                        <option selected>Elija...</option>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectCategoria">Producto</label>
+                    <select class="form-control" id="selectCategoria" name="selectCategoria">
+                        <option selected>Elija...</option>
+                        {% for item in productos %}
+                        <option value="{{item.pfsabprodid}}">{{item.pfsabprodnombre}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i>Guardar</button>
+            </form>
+        </div>
+        <div class="col-md-8" style="padding: 25px ;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <strong>Buscar Por: {{ tag}}</strong>
+                    </div>
+                    <div class="col-4">
+                        <form action="" method="post" autocomplete="off">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="text" class="form-control" name="tag" id="tag"
+                                        placeholder="Enter keyword" />
+                                </div>
+                                <div class="col-6" align="left">
+                                    <input type="submit" value="Buscar..." class="form-control btn btn-primary "
+                                        name="">
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if promoProd != []: %}
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">descuento</th>
+                        <th scope="col">Fecha Inicio</th>
+                        <th scope="col">Fecha Fin</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Creacion</th>
+                        <th scope="col">Producto id</th>
+                        <th scope="col" colspan="2">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for item in promoProd.items %}
+                    <tr>
+                        <th scope="row">{{item.pfsabpromid}}</th>
+                        <td>{{item.pfsabpromdto}}</td>
+                        <td>{{item.pfsabpromfechainicio}}</td>
+                        <td>{{item.pfsabpromfechafin}}</td>
+                        <td>{{item.pfsabpromdescripcion}}</td>
+                        <td>{{item.pfsabpromestado}}</td>
+                        <td>{{item.pfsabpromcreatedat}}</td>
+                        <td>{{item.pfsabproductoid}}</td>
+                        <td>
+                            <button>
+                                <a
+                                    href="{{ url_for('adpromo.onGetControllerAdminPromoUpdate', id=item.pfsabpromid) }}">Actualizar
+                                </a>
+                            </button>
+                        </td>
+                        <td>
+                            <button>
+                                <a
+                                    href="{{ url_for('adpromo.onGetControllerAdminPromoDelete', id=item.pfsabpromid) }}">Eliminar
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if promoProd.has_prev %}
+                    <li class="page-item"> <a class="page-link"
+                            href="{{ url_for('adpromo.controllerAdminPromoList', page=promoProd.prev_num )}}">Previous</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item"> <a class="page link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+                    {% for page in promoProd.iter_pages(left_edge=3, right_edge=3) %}
+                    {% if page %}
+
+                    {% if page==promoProd.page %}
+                    <li class="page-item active"><a class="page-link"
+                            href="{{ url_for('adpromo.controllerAdminPromoList', page=page) }}">{{ page }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link"
+                            href="{{ url_for('adpromo.controllerAdminPromoList', page=page) }}">{{ page }}</a></li>
+                    {% endif %}
+
+                    {% else %}
+                    <li class="page-item disabled" id="example_ellipsis"><a href="#" class="page-link">…</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if promoProd.has_next %}
+                    <li class="page-item"> <a class="page-link"
+                            href="{{ url_for('adpromo.controllerAdminPromoList', page=promoProd.next_num )}}">Next</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item"> <a class="page link btn disabled" href="#">Previous</a></li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+            {% else %}
+            <section class="">
+                <h2 class="text-center" style="padding: 10px; font-size: 5vw;">No existe datos</h2>
+            </section>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

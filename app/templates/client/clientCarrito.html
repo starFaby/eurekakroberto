@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ super() }}
+Carrito
+{% endblock%}
+{% block content %}
+<div class="container p-4">
+    <div class="row">
+        <div class="well text-center display-3">Carrito</div>
+        <div class="col-4">
+            <h2 class="text-center">{{producto.pfsabprodnombre}}</h2>
+            <figure class="text-center">
+                <img style="width: 25vw; height: 25vw;" src="{{producto.pfsabprodimage}}" alt="">
+            </figure>
+            <h2 class="text-center">{{producto.pfsabproddetalle}}</h2>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="text-center">{{producto.pfsabprodnombre}}</h2>
+                </div>
+                <div class="col-sm-6 p-4">
+                    <h2 class="text-center">Stock</h2>
+                    <div class="text-center">
+                        <input class="text-center w-50 display-2" type="text" name="txtStock" id="txtStock"
+                            value="{{producto.pfsabprodstock}}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <h2>Elija la Cantidad</h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <button name="btnCantMenos" id="btnCantMenos">-</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button name="btnCantMas" id="btnCantMas">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <form action="/rcac" method="post">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h2 class="text-center">Cantidad</h2>
+                                <div class="text-center">
+                                    <input class="text-center w-100 display-2" type="text" name="txtCantidad"
+                                        id="txtCantidad" value="1">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h2 class="text-center">Precio</h2>
+                                <div class="text-center">
+                                    <input class="text-center w-100 display-2" type="text" name="txtPrecio"
+                                        id="txtPrecio" value="{{producto.pfsabprodprecio}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <h2 class="text-center">Precio Final</h2>
+                                <div class="text-center">
+                                    <input class="text-center w-100 display-2" type="text" name="txtPrecioFinal"
+                                        id="txtPrecioFinal" value="{{producto.pfsabprodprecio}}">
+                                </div>
+                            </div>
+                            <input class="d-none" type="text" name="txtProductoId" id="txtProductoId"
+                                value="{{producto.pfsabprodid}}">
+                        </div>
+                        {% if current_user.is_authenticated %}
+                            {% if g.fact != None %}
+                            <button type="submit">Agregar A Canasta</button>
+                            <button type="button"><a href="{{ url_for('rcnt.onGetControllerClientCanastaList') }}">Ver Canasta</a></button>
+                            {% else %}
+                            <button type="button"><a href="{{ url_for('rcct.onGetControllerClientCarritoSaveProforma') }}">Crear Canasta</a></button>
+                            {% endif %}
+                        {% else %}
+                        <button type="button">Login</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}
