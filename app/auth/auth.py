@@ -53,8 +53,7 @@ class Auth:
         try:
             return User.query.filter_by(pfsabusername = pfsabusername).first()
         except SQLAlchemyError as e:
-            error = str(e.__dict__['orig'])
-            print(error)
+            print("error", e)
             return render('errors/error500.html')
     def onGetUpdateAuth(self):
         pass

@@ -8,16 +8,27 @@ class ControllerClientCanasta:
 
     def onGetControllerClientCanastaList():
         try:
+            
             userId = current_user.iduser
             userSelect = User.query.get(userId)
             fecha =  datetime.now()
             numberFact = g.fact
             sumaTotal = 0
-            detalleFact = Detalleproforma.query.join(Producto, Detalleproforma.pfsabproductoid == Producto.pfsabprodid).add_columns(Detalleproforma.pfsabdpid , Detalleproforma.pfsabproductoid, Producto.pfsabprodnombre, Producto.pfsabproddetalle, Detalleproforma.pfsabdpcantidad, Detalleproforma.pfsabdprecio, Detalleproforma.pfsabdptotal).filter(Detalleproforma.pfsabdpestado == 1).filter(Detalleproforma.pfsabproformaid == numberFact)
+            detalleFact = Detalleproforma.query.join(Producto, Detalleproforma.pfsabproductoid == Producto.pfsabprodid).add_columns(Detalleproforma.pfsabdpid , Detalleproforma.pfsabproductoid, Producto.pfsabprodnombre, Producto.pfsabproddetalle, Detalleproforma.pfsabdpcantidad, Detalleproforma.pfsabdprecio, Detalleproforma.pfsabdptotal).filter(Detalleproforma.pfsabdpestado == 1).filter(Detalleproforma.pfsabdpnumpf == numberFact)
             for item in detalleFact:
                 sumaTotal += item.pfsabdptotal
 
-            return render('client/clientCanasta.html', userSelect=userSelect, fecha=fecha, detalleFact=detalleFact, numberFact=numberFact, sumaTotal=sumaTotal)
+            dateGeneral = {
+                "userSelect": userSelect,
+                "fecha": fecha,
+                "numberFact": numberFact,
+                "detalleFact": detalleFact,
+                "sumaTotal": sumaTotal
+            }
+            print("dateGeneral")
+            print(dateGeneral)
+
+            return render('client/clientCanasta.html', dateGeneral=dateGeneral)
         except SQLAlchemyError as e:
             error = str(e.__dict__['orig'])
             print(error)

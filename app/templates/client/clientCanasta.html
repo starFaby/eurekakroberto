@@ -21,7 +21,7 @@ Categorias
                 <h2 class="text-center display-6">email: automatismosbrito@hotmail.com</h2>
             </div>
             <div class="col-4 border row">
-                <span class="text-center display-3 ">Canasta <b> Nº </b><span class="text-danger">000{{numberFact}}</span></span>
+                <span class="text-center display-3 ">Canasta <b> Nº </b><span class="text-danger">000{{dateGeneral.numberFact}}</span></span>
                 <div class="row text-center">
                     <img class="m-2"
                         src="https://res.cloudinary.com/dvqgk49zn/image/upload/v1679406318/eurekakits/aux/canasta_lzcsse.png"
@@ -33,17 +33,17 @@ Categorias
     <div class="well">
         <div class="row p-2">
             <div class="col-6 border">
-                <span class="display-6"><b>Cliente: </b>{{ userSelect.pfsabnombres }} {{ userSelect.pfsabapellidos}}</span>
+                <span class="display-6"><b>Cliente: </b>{{ dateGeneral["userSelect"].pfsabnombres }} {{ dateGeneral["userSelect"].pfsabapellidos}}</span>
                 <hr>
-                <span class="display-6"><b>Direccion:</b>{{ userSelect.pfsabdireccion }} </span>
+                <span class="display-6"><b>Direccion:</b>{{ dateGeneral["userSelect"].pfsabdireccion }} </span>
                 <hr>
-                <span class="display-6"><b>Telefono:</b> {{ userSelect.pfsabcellphone}} / {{ userSelect.pfsabphone}} </span>
+                <span class="display-6"><b>Telefono:</b> {{ dateGeneral["userSelect"].pfsabcellphone}} / {{ dateGeneral["userSelect"].pfsabphone}} </span>
                 <hr>
             </div>
             <div class="col-6 border">
-                <span class="display-6"><b>CED:</b> {{ userSelect.pfsabcedula}} </span>
+                <span class="display-6"><b>CED:</b> {{ dateGeneral["userSelect"].pfsabcedula}} </span>
                 <hr>
-                <span class="display-6"><b>Fecha:</b> {{ fecha }}</span>
+                <span class="display-6"><b>Fecha:</b> {{ dateGeneral.fecha }}</span>
                 <hr>
                 <span class="display-6"><b>Forma de Pago:</b></span>
                 <hr>
@@ -63,7 +63,7 @@ Categorias
                 </tr>
             </thead>
             <tbody>
-                {% for item in detalleFact %}
+                {% for item in dateGeneral["detalleFact"] %}
                 <tr class="text-center">
                     <td class="col">{{item.pfsabprodnombre}}</td>
                     <td class="col">{{item.pfsabproddetalle}}</td>
@@ -95,9 +95,9 @@ Categorias
             <div class="col-3 border">
                 <hr>
                 <form action="/rcsv" method="post">
-                    <input class="d-none" type="text" name="txtNumFact" id="txtNumFact" value="{{ numberFact }}">
+                    <input class="d-none" type="text" name="txtNumFact" id="txtNumFact" value="{{ dateGeneral.numberFact }}">
                     <div class="d-flex justify-content-center mb-5 mt-5">
-                        <span class="display-2"><b >Total: </b></span><input class="display-1 w-25" type="text" name="txtSumaTotal" id="txtSumaTotal" value="{{ sumaTotal }}">
+                        <span class="display-2"><b >Total: </b></span><input class="display-1 w-25" type="text" name="txtSumaTotal" id="txtSumaTotal" value="{{ dateGeneral.sumaTotal }}">
                     </div>
                     <div>
                         <div class="d-flex justify-content-center"><button type="submit" class="btn btn-danger"><span class="display-6">Archivar Canasta</span></button> </div>
